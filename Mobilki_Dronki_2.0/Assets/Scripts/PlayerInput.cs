@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -10,23 +11,35 @@ public class PlayerInput : MonoBehaviour
     public Slider sliderTiltX;
     [SerializeField]
     public Slider sliderPower;
+
     [SerializeField]
     public GameObject player;
-    [SerializeField]
+
     //Czu³oœæ przechylenia telefonu
+    [SerializeField]
     public float PlayerTilt;
+    //Moc drona
     [SerializeField]
     public float PlayerThrustForce;
-    [SerializeField]
     //Czu³oœæ przechylenia drona
+    [SerializeField]
     public float PlayerRotation;
 
+
+    Gravity gravity;
     private Rigidbody body;
-    private float phoneTilt;
+
+    //Zmienna przechowuj¹ca wartoœæ przechylenia telefonu
+    private float phoneTiltZ;
+    //Moc do utrzymania pozycji
+    private float accurateThrustForce;
+    
+
 
     private void Start()
     {
-        body = player.GetComponent<Rigidbody>();
+        body = player.GetComponentInChildren<Rigidbody>();
+        gravity = player.GetComponentInParent<Gravity>();
 
         if(!SystemInfo.supportsGyroscope)
         {
@@ -40,25 +53,41 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        TiltController();
+        phoneTiltZ = Input.gyro.gravity.x;
+
+        //TiltController();
+
         RotationController();
         ThrustController();
+
+        //body.AddForce(Vector3.forward * PlayerThrustForce);
     }
     
-    private void TiltController()
+    /*private void TiltController()
     {
-        //Pobiera wartoœæ przechylenia telefonu i mno¿y przez czu³oœæ
-        phoneTilt = Input.gyro.gravity.x * PlayerTilt;
-    }
+        body
+    }*/
     private void ThrustController()
     {
         //Si³a o wartoœci 1 skierowana na oœ y * Prawy suwak * Si³a wznoszenia drona
-        body.AddForce(Vector3.up * sliderPower.value * PlayerThrustForce, ForceMode.Force);
+        //body.AddForce(Vector3.up * sliderPower.value * PlayerThrustForce * (1 - Math.Abs(phoneTiltZ)), ForceMode.Force);
+        body.AddForce(Vector3.up * gravity.Y);
+        Debug.Log("Thrust Controller: " + body.GetAccumulatedForce());
     }
 
     private void RotationController()
     {
-        Quaternion targetRotation = Quaternion.Euler(sliderTiltX.value, transform.eulerAngles.y, phoneTilt);
-        body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, Time.fixedDeltaTime * PlayerRotation));
+
+        //Quaternion targetRotation = Quaternion.Euler(sliderTiltX.value, transform.eulerAngles.y, phoneTiltZ * PlayerTilt);
+        //body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * PlayerRotation * -1));
+        body.AddForce(Vector3.right * PlayerThrustForce * phoneTiltZ * sliderPower.value, ForceMode.Acceleration);
+        
+        Vector3 eulerAngles = transform.rotation.eulerAngles;
+        //Debug.Log(targetRotation);
+    }
+
+    private void CalculateForces()
+    {
+        accurateThrustForce = sliderPower.value * PlayerThrustForce;
     }
 }
