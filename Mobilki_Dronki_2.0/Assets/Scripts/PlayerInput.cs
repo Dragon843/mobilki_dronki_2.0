@@ -2,37 +2,33 @@ using System;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField]
-    public Slider sliderTiltX;
+    Slider tiltXSlider;
     [SerializeField]
-    public Slider sliderPower;
+    Slider powerSlider;
 
     [SerializeField]
-    public GameObject player;
+    GameObject player;
 
     //Czu³oœæ przechylenia telefonu
     [SerializeField]
-    public float PlayerTilt;
+    float tiltZPlayer;
     //Moc drona
     [SerializeField]
-    public float PlayerThrustForce;
+    float thrustForcePlayer;
     //Czu³oœæ przechylenia drona
     [SerializeField]
-    public float PlayerRotation;
+    float rotationPlayer;
 
 
     Gravity gravity;
     private Rigidbody body;
-
-    //Zmienna przechowuj¹ca wartoœæ przechylenia telefonu
-    private float phoneTiltZ;
-    //Moc do utrzymania pozycji
-    private float accurateThrustForce;
     
 
 
@@ -53,41 +49,80 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        phoneTiltZ = Input.gyro.gravity.x;
-
-        //TiltController();
-
-        RotationController();
+        TiltController();
+        //RotationController();
         ThrustController();
-
+        
         //body.AddForce(Vector3.forward * PlayerThrustForce);
     }
-    
-    /*private void TiltController()
+
+    private void TiltController()
     {
-        body
-    }*/
+        body.AddForce(Vector3.forward * CalculateTiltForceX());
+        body.AddForce(Vector3.right * CalculateTiltForceZ());
+    }
     private void ThrustController()
     {
+        /*float accumulatedForce = CalculateThrustForce() - (CalculateTiltForceX() + CalculateTiltForceZ());
+
+        if(accumulatedForce < 0)
+        {
+            accumulatedForce = 0;
+        }*/
+
         //Si³a o wartoœci 1 skierowana na oœ y * Prawy suwak * Si³a wznoszenia drona
-        //body.AddForce(Vector3.up * sliderPower.value * PlayerThrustForce * (1 - Math.Abs(phoneTiltZ)), ForceMode.Force);
-        body.AddForce(Vector3.up * gravity.Y);
+        body.AddForce(Vector3.up * CalculateThrustForce());
         Debug.Log("Thrust Controller: " + body.GetAccumulatedForce());
+        Debug.Log("Calculation Thrust Force" + CalculateThrustForce());
     }
 
-    private void RotationController()
+    /*private void RotationController()
     {
 
         //Quaternion targetRotation = Quaternion.Euler(sliderTiltX.value, transform.eulerAngles.y, phoneTiltZ * PlayerTilt);
         //body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * PlayerRotation * -1));
-        body.AddForce(Vector3.right * PlayerThrustForce * phoneTiltZ * sliderPower.value, ForceMode.Acceleration);
+        body.AddForce(Vector3.right * thrustForcePlayer * phoneTiltZ * powerSlider.value, ForceMode.Acceleration);
         
         Vector3 eulerAngles = transform.rotation.eulerAngles;
         //Debug.Log(targetRotation);
+    }*/
+
+    private float CalculateThrustForce()
+    {
+        float accurateThrustForce;
+
+        //
+        /*if (thrustForcePlayer - gravity.Y <= gravity.Y)
+        {
+            accurateThrustForce = powerSlider.value * thrustForcePlayer;
+        }
+        else
+        {
+            accurateThrustForce = (powerSlider.value * (thrustForcePlayer - gravity.Y)) + gravity.Y;
+        }*/
+
+        accurateThrustForce = powerSlider.value * thrustForcePlayer;
+
+        return accurateThrustForce;
     }
 
-    private void CalculateForces()
+    private float CalculateTiltForceX()
     {
-        accurateThrustForce = sliderPower.value * PlayerThrustForce;
+        float accurateTiltXForce;
+
+        accurateTiltXForce = tiltXSlider.value * thrustForcePlayer;
+
+        Debug.Log("Calculation Tilt X Force: " + accurateTiltXForce);
+        return accurateTiltXForce;
+    }
+
+    private float CalculateTiltForceZ()
+    {
+        float phoneTiltZ = Input.gyro.gravity.x;
+        float accurateTiltZForce;
+
+        accurateTiltZForce = phoneTiltZ * thrustForcePlayer;
+
+        return accurateTiltZForce;
     }
 }
