@@ -20,10 +20,10 @@ public class PlayerInput : MonoBehaviour
 
     //Czu³oœæ przechylenia telefonu
     [SerializeField]
-    float tiltZPlayer;
+    float tiltZPlayer = 2f;
     //Moc drona
     [SerializeField]
-    float thrustForcePlayer;
+    float thrustForcePlayer = 20f;
     //Czu³oœæ przechylenia drona
     [SerializeField]
     float rotationPlayer;
@@ -59,11 +59,12 @@ public class PlayerInput : MonoBehaviour
         //RotationController();
 
         //Debug.Log("Body speed: " + body.GetAccumulatedForce());
+        Debug.Log("Ruch znormalizowany: " + movement);
     }
 
     private float CalculateThrustForce()
     {
-        //
+        /*
         if (thrustForcePlayer - gravity.Y <= gravity.Y)
         {
             return movement.y * thrustForcePlayer;
@@ -71,7 +72,9 @@ public class PlayerInput : MonoBehaviour
         else
         {
             return (movement.y * (thrustForcePlayer - gravity.Y)) + gravity.Y;
-        }
+        }*/
+
+        return movement.y * thrustForcePlayer;
     }
 
     private float CalculateTiltForceZ()
