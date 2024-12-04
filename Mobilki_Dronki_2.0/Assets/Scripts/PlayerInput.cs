@@ -55,48 +55,23 @@ public class PlayerInput : MonoBehaviour
         movement = new Vector3(Input.gyro.gravity.x * tiltZPlayer, powerSlider.value, tiltXSlider.value);
         movement.Normalize();
 
-        body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ());
-        /*body.AddForce(Vector3.forward * CalculateTiltForceZ());
-        body.AddForce(Vector3.right * CalculateTiltForceX());
-        body.AddForce(Vector3.up * CalculateThrustForce());*/
-        TiltController();
+        body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ(),ForceMode.Acceleration);
         //RotationController();
-        ThrustController();
 
-        //body.AddForce(Vector3.forward * PlayerThrustForce);
-
-        Debug.Log("Body speed: " + body.GetAccumulatedForce());
-    }
-
-    private void TiltController()
-    {
-        
-    }
-    private void ThrustController()
-    {
-        //Si³a o wartoœci 1 skierowana na oœ y * Prawy suwak * Si³a wznoszenia drona
-        
-        Debug.Log("Thrust Controller: " + body.GetAccumulatedForce());
-        Debug.Log("Calculation Thrust Force" + CalculateThrustForce());
+        //Debug.Log("Body speed: " + body.GetAccumulatedForce());
     }
 
     private float CalculateThrustForce()
     {
-        float accurateThrustForce;
-
         //
-        /*if (thrustForcePlayer - gravity.Y <= gravity.Y)
+        if (thrustForcePlayer - gravity.Y <= gravity.Y)
         {
-            accurateThrustForce = powerSlider.value * thrustForcePlayer;
+            return movement.y * thrustForcePlayer;
         }
         else
         {
-            accurateThrustForce = (powerSlider.value * (thrustForcePlayer - gravity.Y)) + gravity.Y;
-        }*/
-
-        accurateThrustForce = movement.y * thrustForcePlayer;
-
-        return accurateThrustForce;
+            return (movement.y * (thrustForcePlayer - gravity.Y)) + gravity.Y;
+        }
     }
 
     private float CalculateTiltForceZ()
