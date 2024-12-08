@@ -25,8 +25,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     float thrustForcePlayer = 20f;
     //Czu³oœæ przechylenia drona
-    [SerializeField]
-    float rotationPlayer;
+    //[SerializeField]
+    //float rotationPlayer;
 
     private Rigidbody body;
 
@@ -45,7 +45,6 @@ public class PlayerInput : MonoBehaviour
         if (!SystemInfo.supportsGyroscope)
         {
             Debug.LogError("Gyroscope not supported on this device!");
-            return;
         }
     }
 
