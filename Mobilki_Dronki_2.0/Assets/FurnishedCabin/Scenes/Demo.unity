@@ -949,7 +949,7 @@ MonoBehaviour:
   tiltXSlider: {fileID: 2004065934}
   powerSlider: {fileID: 1360352250}
   player: {fileID: 98814688}
-  tiltZPlayer: 2
+  tiltZPlayer: 3
   thrustForcePlayer: 20
   rotationPlayer: 0
 --- !u!1 &879192082
