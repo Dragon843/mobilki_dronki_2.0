@@ -1,0 +1,3 @@
+/home/dragoon/Documents/GitHub/mobilki_dronki_2.0/Mobilki_Dronki_2.0/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/CMakeLists.txt
+/home/dragoon/Documents/GitHub/mobilki_dronki_2.0/Mobilki_Dronki_2.0/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/FramePacing/CMakeLists.txt
+/home/dragoon/Documents/GitHub/mobilki_dronki_2.0/Mobilki_Dronki_2.0/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/CMakeLists.txt
