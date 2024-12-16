@@ -1,5 +1,6 @@
 using System;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerInput : MonoBehaviour
 {
+    Gravity gravity;
+
     [SerializeField]
     Slider tiltXSlider;
     [SerializeField]
@@ -15,13 +18,13 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     GameObject player;
 
-    //Czuï¿½oï¿½ï¿½ przechylenia telefonu
+    //Czu³oœæ przechylenia telefonu
     [SerializeField]
     float tiltZPlayer = 2f;
     //Moc drona
     [SerializeField]
     float thrustForcePlayer = 20f;
-    //Czuï¿½oï¿½ï¿½ przechylenia drona
+    //Czu³oœæ przechylenia drona
     [SerializeField]
     float rotationPlayer;
 
@@ -34,9 +37,9 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         body = player.GetComponentInChildren<Rigidbody>();
-        
+        gravity = player.GetComponentInParent<Gravity>();
 
-        //Wï¿½ï¿½czamy akcelerometr
+        //W³¹czamy akcelerometr
         Input.gyro.enabled = true;
 
         if (!SystemInfo.supportsGyroscope)
