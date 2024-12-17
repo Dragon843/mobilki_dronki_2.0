@@ -1,6 +1,5 @@
 using System;
 using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     Gravity gravity;
 
     [SerializeField]
+<<<<<<< HEAD
     Slider tiltXSlider;
     [SerializeField]
     Slider powerSlider;
@@ -33,9 +33,21 @@ public class PlayerInput : MonoBehaviour
     private Vector3 movement;
     
 
+=======
+    public Slider sliderAngle;
+    [SerializeField]
+    public Slider sliderPower;
+    [SerializeField]
+    public GameObject PlayerControlled;
+    [SerializeField]
+    public float PlayerSpeed = 5f;
 
-    private void Start()
+    private float LeftRightControll;
+>>>>>>> parent of a24a61f (Działające sterowanie (drewno))
+
+    void Start()
     {
+<<<<<<< HEAD
         body = player.GetComponentInChildren<Rigidbody>();
         gravity = player.GetComponentInParent<Gravity>();
 
@@ -46,10 +58,14 @@ public class PlayerInput : MonoBehaviour
         {
             Debug.LogError("Gyroscope not supported on this device!");
         }
+=======
+        LeftRightControll = Input.acceleration.x;
+>>>>>>> parent of a24a61f (Działające sterowanie (drewno))
     }
 
-    private void FixedUpdate()
+    void Update()
     {
+<<<<<<< HEAD
         
         movement = new Vector3(Input.gyro.gravity.x * tiltZPlayer, powerSlider.value, tiltXSlider.value);
         movement.Normalize();
@@ -74,6 +90,10 @@ public class PlayerInput : MonoBehaviour
         }*/
 
         return movement.y * thrustForcePlayer;
+=======
+        PlayerControlled.GetComponent<Rigidbody>().AddForce(0, sliderPower.value, 0);
+        PlayerControlled.GetComponent<Rigidbody>().AddTorque(PlayerSpeed * sliderAngle.value, 0, 0);
+>>>>>>> parent of a24a61f (Działające sterowanie (drewno))
     }
 
     private float CalculateTiltForceZ()
