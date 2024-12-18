@@ -9,12 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
-<<<<<<< HEAD
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: bbe118f4c507419a09761d324e72a9f3, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 74a05b42a1e86fc44ad7ee0681b5469a, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: a169fe5243b97d34f9b4058d95405059, type: 2}
-=======
->>>>>>> parent of a24a61f (Działające sterowanie (drewno))
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: de63e392a9891eb4da839ae8563194d2, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
