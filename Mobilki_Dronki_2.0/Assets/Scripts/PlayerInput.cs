@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -25,7 +26,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     float rotationPlayer;
 
-    private Rigidbody body;
+
 
     private Vector3 movement;
     
@@ -34,7 +35,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        body = player.GetComponentInChildren<Rigidbody>();
+        
         gravity = Physics.gravity.y;
 
         //W��czamy akcelerometr
@@ -53,11 +54,11 @@ public class PlayerInput : MonoBehaviour
         movement = new Vector3(Input.gyro.gravity.x * tiltZPlayer, powerSlider.value, tiltXSlider.value);
         movement.Normalize();
 
-        //body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ(),ForceMode.Acceleration);
-        body.AddForce(0, CalculateThrustForce(), 0,ForceMode.Acceleration);
-        Quaternion targetRotation = Quaternion.Euler(tiltXSlider.value, transform.eulerAngles.y, movement.x);
-        body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, rotationPlayer * -1));
-        //RotationController();
+        player.transform.position += Vector3.forward * CalculateTiltForceX();
+        player.transform.position += Vector3.up * CalculateThrustForce();
+        player.transform.position += Vector3.right * CalculateTiltForceZ();
+
+        
 
         //Debug.Log("Body speed: " + body.GetAccumulatedForce());
         Debug.Log("Ruch znormalizowany: " + movement);
@@ -75,7 +76,7 @@ public class PlayerInput : MonoBehaviour
             return gravity + (powerSlider.value * (thrustForcePlayer - gravity));
         }*/
 
-        return gravity + (powerSlider.value * (thrustForcePlayer - gravity));
+        return movement.y * thrustForcePlayer;
     }
 
     private float CalculateTiltForceZ()
