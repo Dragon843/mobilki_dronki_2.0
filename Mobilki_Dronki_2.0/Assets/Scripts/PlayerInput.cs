@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,7 +18,7 @@ public class PlayerInput : MonoBehaviour
 
     //Czu�o�� przechylenia telefonu
     [SerializeField]
-    float tiltZPlayer = 2f;
+    float tiltZPhone = 2f;
     //Moc drona
     [SerializeField]
     float thrustForcePlayer = 20f;
@@ -28,14 +29,11 @@ public class PlayerInput : MonoBehaviour
     private Rigidbody body;
 
     private Vector3 movement;
-    
-    private float gravity;
 
 
     private void Start()
     {
         body = player.GetComponentInChildren<Rigidbody>();
-        gravity = Physics.gravity.y;
 
         //W��czamy akcelerometr
         Input.gyro.enabled = true;
@@ -50,14 +48,13 @@ public class PlayerInput : MonoBehaviour
     private void FixedUpdate()
     {
         
-        movement = new Vector3(Input.gyro.gravity.x * tiltZPlayer, powerSlider.value, tiltXSlider.value);
+        movement = new Vector3(Input.gyro.gravity.x * tiltZPhone, powerSlider.value, tiltXSlider.value);
         movement.Normalize();
 
         //body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ(),ForceMode.Acceleration);
         body.AddForce(0, CalculateThrustForce(), 0,ForceMode.Acceleration);
-        Quaternion targetRotation = Quaternion.Euler(tiltXSlider.value, transform.eulerAngles.y, movement.x);
-        body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, rotationPlayer * -1));
-        //RotationController();
+        
+        RotationController();
 
         //Debug.Log("Body speed: " + body.GetAccumulatedForce());
         Debug.Log("Ruch znormalizowany: " + movement);
@@ -75,7 +72,7 @@ public class PlayerInput : MonoBehaviour
             return gravity + (powerSlider.value * (thrustForcePlayer - gravity));
         }*/
 
-        return gravity + (powerSlider.value * (thrustForcePlayer - gravity));
+        return 9.81f + (powerSlider.value * (thrustForcePlayer - 9.81f));
     }
 
     private float CalculateTiltForceZ()
@@ -88,15 +85,14 @@ public class PlayerInput : MonoBehaviour
         return movement.x * thrustForcePlayer * movement.y;
     }
 
-    /*private void RotationController()
+    private void RotationController()
     {
+        float gyroOriantation = Input.gyro.gravity.y;
+        Quaternion anglePlayer = Quaternion.Euler(tiltXSlider.value, 0, -0.5f + (45 * Input.gyro.gravity.y));
+        player.transform.rotation = Quaternion.Lerp(player.transform.rotation, anglePlayer, Time.deltaTime * rotationPlayer);
 
-        //Quaternion targetRotation = Quaternion.Euler(sliderTiltX.value, transform.eulerAngles.y, phoneTiltZ * PlayerTilt);
-        //body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * PlayerRotation * -1));
-        
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
-        //Debug.Log(targetRotation);
-    }*/
+        Debug.Log(Input.gyro.gravity.y);
+    }
 
     
 }
