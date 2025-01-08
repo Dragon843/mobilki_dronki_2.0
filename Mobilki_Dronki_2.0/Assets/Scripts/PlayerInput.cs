@@ -9,16 +9,16 @@ using static UnityEngine.Rendering.DebugUI;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField]
-    Slider tiltXSlider;
+    Slider leftSlider;
     [SerializeField]
-    Slider powerSlider;
+    Slider rightSlider;
 
     [SerializeField]
     GameObject player;
 
     //Czu�o�� przechylenia telefonu
     [SerializeField]
-    float tiltZPhone = 2f;
+    float tiltPhoneZ = 2f;
     //Moc drona
     [SerializeField]
     float thrustForcePlayer = 20f;
@@ -48,7 +48,7 @@ public class PlayerInput : MonoBehaviour
     private void FixedUpdate()
     {
         
-        movement = new Vector3(Input.gyro.gravity.x * tiltZPhone, powerSlider.value, tiltXSlider.value);
+        movement = new Vector3(Input.gyro.gravity.x * tiltPhoneZ, rightSlider.value, leftSlider.value);
         movement.Normalize();
 
         //body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ(),ForceMode.Acceleration);
@@ -72,7 +72,7 @@ public class PlayerInput : MonoBehaviour
             return gravity + (powerSlider.value * (thrustForcePlayer - gravity));
         }*/
 
-        return 9.81f + (powerSlider.value * (thrustForcePlayer - 9.81f));
+        return 9.81f + (rightSlider.value * (thrustForcePlayer - 9.81f));
     }
 
     private float CalculateTiltForceZ()
@@ -88,7 +88,7 @@ public class PlayerInput : MonoBehaviour
     private void RotationController()
     {
         float gyroOriantation = Input.gyro.gravity.y;
-        Quaternion anglePlayer = Quaternion.Euler(tiltXSlider.value, 0, -0.5f + (45 * Input.gyro.gravity.y));
+        Quaternion anglePlayer = Quaternion.Euler(leftSlider.value, 0, -0.5f + (45 * Input.gyro.gravity.y));
         player.transform.rotation = Quaternion.Lerp(player.transform.rotation, anglePlayer, Time.deltaTime * rotationPlayer);
 
         Debug.Log(Input.gyro.gravity.y);
