@@ -5,8 +5,8 @@ public class AIDroneController : MonoBehaviour
     public Waypoints waypointsObject; // Obiekt Waypoints, który zawiera punkty kontrolne
     private int currentWaypoint = 0;
 
-    public float moveSpeed = 5f; // Prędkość ruchu
-    public float turnSpeed = 3f;  // Prędkość obracania
+    public float moveSpeed = 3f; // Prędkość ruchu
+    public float turnSpeed = 4f;  // Prędkość obracania
 
     private Rigidbody rb;
 
@@ -98,17 +98,18 @@ public class AIDroneController : MonoBehaviour
     Vector3 direction = (targetWaypoint.position - transform.position).normalized;
     float distance = Vector3.Distance(transform.position, targetWaypoint.position);
 
-    Debug.Log($"Ruch do waypointa {currentWaypoint}: {targetWaypoint.name}, Pozycja waypointa: {targetWaypoint.position}");
+    Debug.Log($"Ruch do waypointa {currentWaypoint}: {targetWaypoint.name}, Pozycja waypointa: {targetWaypoint.localPosition}");
     Debug.Log($"Odległość do waypointa: {distance}");
 
     // Jeśli odległość do waypointa jest mniejsza niż próg, przejdź do następnego waypointa
-    if (distance < 1f)
+    if (distance < 0.3f)
     {
-        //Pozycja drona gdy osiągnie waypointa
-        Debug.Log($"Pozycja drona gdy osiągnie waypointa: {transform.position}");
+        //Pozycja drona gdy osiągnie waypointa   Debug.Log($"Pozycja drona gdy osiągnie waypointa: {transform.position}");
 
         Debug.Log($"Osiągnięto waypoint {currentWaypoint}: {targetWaypoint.name}, Pozycja: {targetWaypoint.position}, Drone: {transform.position}");
-        currentWaypoint = (currentWaypoint + 1) % waypointsObject.GetWaypointCount();
+        rb = GetComponent<Rigidbody>();
+        if(targetWaypoint.name == "Waypoint19") {rb.linearVelocity = Vector3.zero; rb.useGravity = true; return;}
+        currentWaypoint = (currentWaypoint + 1) % waypointsObject.GetWaypointCount(); 
     }
     else
     {
@@ -123,4 +124,6 @@ public class AIDroneController : MonoBehaviour
     rb.linearVelocity = transform.forward * moveSpeed;
 }
 
+        //if(targetWaypoint.name == "Waypoint19") {rb.linearVelocity = Vector3.zero; return;}
+        //else {currentWaypoint = (currentWaypoint + 1) % waypointsObject.GetWaypointCount(); return;}
 }
