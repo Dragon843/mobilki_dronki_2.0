@@ -218,6 +218,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 98814691}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 98814692}
     - targetCorrespondingSourceObject: {fileID: 2860179509265780470, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 98814690}
@@ -310,11 +313,29 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &98814692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98814688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0473e5a236deb054cb819f208c95c995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angleXSlider: {fileID: 0}
+  thrustPowerSlider: {fileID: 0}
+  player: {fileID: 98814688}
+  tiltPhoneZ: 2
+  thrustForcePlayer: 0.2
+  rotationPlayer: 0
 --- !u!1 &149513135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,7 +1161,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 833859259}
-  - component: {fileID: 833859260}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1166,24 +1186,6 @@ Transform:
   - {fileID: 218426991}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &833859260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833859258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0473e5a236deb054cb819f208c95c995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiltXSlider: {fileID: 2004065934}
-  powerSlider: {fileID: 1360352250}
-  player: {fileID: 98814688}
-  tiltZPhone: 2
-  thrustForcePlayer: 15
-  rotationPlayer: 2
 --- !u!1 &879192082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,7 +1579,7 @@ GameObject:
   - component: {fileID: 1360352251}
   - component: {fileID: 1360352250}
   m_Layer: 5
-  m_Name: Slider Right
+  m_Name: Right Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1885,7 +1887,7 @@ GameObject:
   - component: {fileID: 2004065933}
   - component: {fileID: 2004065934}
   m_Layer: 5
-  m_Name: Slider Left
+  m_Name: Left Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
