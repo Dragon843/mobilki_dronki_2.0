@@ -3,7 +3,10 @@ using UnityEngine;
 public class AIDroneController : MonoBehaviour
 {
     public Waypoints waypointsObject; // Obiekt Waypoints, który zawiera punkty kontrolne
-    private int currentWaypoint = 0;
+    public int currentWaypoint = 0;
+    public Timer timer;
+    private bool hasReachedWaypoint19 = false;
+    private bool isStopped = false;
 
     public float moveSpeed = 3f; // Prędkość ruchu
     public float turnSpeed = 4f;  // Prędkość obracania
@@ -39,6 +42,11 @@ public class AIDroneController : MonoBehaviour
         }
     }
 
+    if (timer == null)
+        {
+            timer = FindObjectOfType<Timer>(); // Automatycznie znajdź Timer w scenie
+        }
+
     currentWaypoint = 0;
 }
 
@@ -70,10 +78,16 @@ public class AIDroneController : MonoBehaviour
     Debug.Log("Dron AI działa i przetwarza punkty kontrolne.");
     NavigateToWaypoint();
 }
-
+// Dodanie metody getter do currentWaypoint
+    public int GetCurrentWaypoint()
+    {
+        return currentWaypoint;
+    }
 
     private void NavigateToWaypoint()
 {
+    if(isStopped){return;}
+
     if (waypointsObject == null)
     {
         Debug.LogError("waypointsObject jest null! Upewnij się, że obiekt Waypoints jest przypisany w inspektorze.");
@@ -108,7 +122,15 @@ public class AIDroneController : MonoBehaviour
 
         Debug.Log($"Osiągnięto waypoint {currentWaypoint}: {targetWaypoint.name}, Pozycja: {targetWaypoint.position}, Drone: {transform.position}");
         rb = GetComponent<Rigidbody>();
-        if(targetWaypoint.name == "Waypoint19") {rb.linearVelocity = Vector3.zero; rb.useGravity = true; return;}
+        if(targetWaypoint.name == "Waypoint19" && !hasReachedWaypoint19) {
+            rb.linearVelocity = Vector3.zero; 
+            rb.useGravity = true; 
+            float timeAtWaypoint = timer.GetElapsedTime();
+            Debug.Log($"Czas to: {timeAtWaypoint} s");
+            hasReachedWaypoint19 = true; // Oznacz, że waypoint został osiągnięty
+            isStopped = true;
+            return;}
+        
         currentWaypoint = (currentWaypoint + 1) % waypointsObject.GetWaypointCount(); 
     }
     else
@@ -123,7 +145,4 @@ public class AIDroneController : MonoBehaviour
     rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime));
     rb.linearVelocity = transform.forward * moveSpeed;
 }
-
-        //if(targetWaypoint.name == "Waypoint19") {rb.linearVelocity = Vector3.zero; return;}
-        //else {currentWaypoint = (currentWaypoint + 1) % waypointsObject.GetWaypointCount(); return;}
 }

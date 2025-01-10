@@ -225,6 +225,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 574810052}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 574810055}
     - targetCorrespondingSourceObject: {fileID: 2860179509265780470, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 53635046}
@@ -1076,8 +1079,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointsObject: {fileID: 864468504}
-  moveSpeed: 2.5
-  turnSpeed: 4.5
+  currentWaypoint: 0
+  timer: {fileID: 0}
+  moveSpeed: 2
+  turnSpeed: 4
+--- !u!114 &574810055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53635044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d8a986805ccba47b8534912ce29ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneController: {fileID: 574810052}
+  writeInterval: 10
+  FlightID: 104
 --- !u!1 &600274044
 GameObject:
   m_ObjectHideFlags: 0
