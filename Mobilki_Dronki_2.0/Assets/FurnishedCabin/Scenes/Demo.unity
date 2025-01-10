@@ -330,12 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0473e5a236deb054cb819f208c95c995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleXSlider: {fileID: 0}
-  thrustPowerSlider: {fileID: 0}
+  angleXSlider: {fileID: 2004065934}
+  thrustPowerSlider: {fileID: 1360352250}
   player: {fileID: 98814688}
   tiltPhoneZ: 2
   thrustForcePlayer: 0.2
   rotationPlayer: 0
+  moveSpeed: 1
 --- !u!1 &149513135
 GameObject:
   m_ObjectHideFlags: 0

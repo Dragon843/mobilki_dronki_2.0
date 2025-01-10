@@ -22,6 +22,8 @@ public class PlayerInput : MonoBehaviour
     //Czu�o�� przechylenia drona
     [SerializeField]
     private float rotationPlayer;
+    [SerializeField]
+    private float moveSpeed;
 
     private Vector3 movement;
     private Vector3 gyroOrientation;
@@ -43,7 +45,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-
+        Vector3 currentPosition = transform.position;
+        currentPosition.y = Mathf.Lerp(currentPosition.y, thrustPowerSlider.value * thrustForcePlayer, Time.deltaTime * moveSpeed);
+        transform.position = currentPosition;
     }
 
     private void OnThrPowSliderChanged(float value)
