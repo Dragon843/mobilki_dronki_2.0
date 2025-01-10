@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -31,8 +32,16 @@ public class PlayerInput : MonoBehaviour
     private Rigidbody body;
 
     private Vector3 movement;
-    
 
+    public void Update()
+    {
+        // kiedy dron spadnie ponizej wartosci -10 zostanie respawnowany do miejsca poczatkowego
+        if (transform.position.y <= -10f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        //
+    }
 
     private void Start()
     {
