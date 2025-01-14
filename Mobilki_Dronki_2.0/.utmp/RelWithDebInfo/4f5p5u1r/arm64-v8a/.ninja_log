@@ -1,0 +1,12 @@
+# ninja log v5
+157	729	7585688306053752	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	2fa972a487373031
+731	1990	7585688317141176	C:/Users/barto/OneDrive/Dokumenty/mobilki_dronki2.0git/mobilki_dronki_2.0/Mobilki_Dronki_2.0/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4f5p5u1r/obj/arm64-v8a/libswappywrapper.so	199c460d31e279a1
+22	3668	7585688333918055	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	23268b000255432b
+70	3672	7585688332703366	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6100f3a982f0f870
+88	3756	7585688334437837	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	799302b7f2b62603
+144	3821	7585688335943820	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	7b0268e53fd0dcd2
+42	3926	7585688337682741	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c80769e3c2a61e68
+1	3994	7585688338942233	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	43ce70a36f5464e7
+52	4142	7585688340552076	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e3ff1600ae36a9c2
+7	4248	7585688341586963	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8df713dfda1df1c3
+4248	4429	7585688343278136	C:/Users/barto/OneDrive/Dokumenty/mobilki_dronki2.0git/mobilki_dronki_2.0/Mobilki_Dronki_2.0/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4f5p5u1r/obj/arm64-v8a/libgame.so	5e5c7341426b69d0
