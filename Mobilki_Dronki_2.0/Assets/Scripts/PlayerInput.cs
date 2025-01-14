@@ -1,10 +1,6 @@
-using System;
-//using System.Runtime.CompilerServices;
-//using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-//using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -20,7 +16,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private float rotationSpeedX; //Prędkość zmiany nachylenia w X
     [SerializeField]
-    private float rotationSpeedY = 2f; //Czulosc przechylenia telefonu
+    private float rotationSpeedY; //Czulosc przechylenia telefonu
     [SerializeField]
     private float rotationSpeedZ; //Prędkość zmiany nachylenia w Z
     private float rotationPhone;
@@ -28,10 +24,6 @@ public class PlayerInput : MonoBehaviour
     private float xTransform;
     private float zTransform;
 
-
-    Vector3 movement;
-
-    Vector3 force;
 
     private void Start()
     {
@@ -47,6 +39,14 @@ public class PlayerInput : MonoBehaviour
         {
             Debug.LogError("Gyroscope not supported on this device!");
             return;
+        }
+    }
+
+    public void Update()
+    {
+        if (transform.position.y <= -10f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
