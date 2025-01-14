@@ -1,54 +1,38 @@
-using System;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
-    Gravity gravity;
+    public Rigidbody rb;
 
-    [SerializeField]
-    Slider tiltXSlider;
-    [SerializeField]
-    Slider powerSlider;
+    [Header("UI Elements")]
+    public Slider angleXSlider;
+    public Slider thrustPowerSlider;
 
+    [Header("Flight settings")]
     [SerializeField]
-    GameObject player;
-
-    //Czu³oœæ przechylenia telefonu
+    private float thrustForcePlayer = 15f; //SiÅ‚a lotu drona
     [SerializeField]
-    float tiltZPlayer = 2f;
-    //Moc drona
+    private float rotationSpeedX = 18f; //PrÄ™dkoÅ›Ä‡Â zmiany nachylenia w X
+    /*[SerializeField]
+    private float rotationSpeedY = 20f; //Czulosc przechylenia telefonu
     [SerializeField]
-    float thrustForcePlayer = 20f;
-    //Czu³oœæ przechylenia drona
-    [SerializeField]
-    float rotationPlayer;
+    private float rotationSpeedZ = 20f; //PrÄ™dkoÅ›Ä‡Â zmiany nachylenia w Z */
+    private float rotationPhone;
+    private float yTransform;
+    private float xTransform;
+    private float zTransform;
 
-    private Rigidbody body;
-
-    private Vector3 movement;
-
-    public void Update()
-    {
-        // kiedy dron spadnie ponizej wartosci -10 zostanie respawnowany do miejsca poczatkowego
-        if (transform.position.y <= -10f)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        //
-    }
 
     private void Start()
     {
-        body = player.GetComponentInChildren<Rigidbody>();
-        gravity = player.GetComponentInParent<Gravity>();
+        rb = GetComponent<Rigidbody>();
 
-        //W³¹czamy akcelerometr
+        thrustPowerSlider.onValueChanged.AddListener(OnThrPowSliderChanged);
+        angleXSlider.onValueChanged.AddListener(OnAngleXSliderChanged);
+
+        //Wï¿½ï¿½czamy akcelerometr
         Input.gyro.enabled = true;
 
         if (!SystemInfo.supportsGyroscope)
@@ -58,52 +42,65 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        
-        movement = new Vector3(Input.gyro.gravity.x * tiltZPlayer, powerSlider.value, tiltXSlider.value);
-        movement.Normalize();
-
-        body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ(),ForceMode.Acceleration);
-        //RotationController();
-
-        //Debug.Log("Body speed: " + body.GetAccumulatedForce());
-        Debug.Log("Ruch znormalizowany: " + movement);
+        if (transform.position.y <= -10f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
-    private float CalculateThrustForce()
+    private void FixedUpdate()
     {
-        /*
-        if (thrustForcePlayer - gravity.Y <= gravity.Y)
+        rb.AddRelativeForce(0f, yTransform * thrustForcePlayer * Time.deltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
+        gyroControll();
+        RotationControll();
+    }
+
+    private void OnThrPowSliderChanged(float value)
+    {
+        if(value <= 0.2f && value >= -0.2)
         {
-            return movement.y * thrustForcePlayer;
+            yTransform = 0;
         }
         else
         {
-            return (movement.y * (thrustForcePlayer - gravity.Y)) + gravity.Y;
-        }*/
-
-        return movement.y * thrustForcePlayer;
-    }
-
-    private float CalculateTiltForceZ()
-    {
-        return movement.z * thrustForcePlayer * movement.y;
-    }
-
-    private float CalculateTiltForceX()
-    {
-        return movement.x * thrustForcePlayer * movement.y;
-    }
-
-    /*private void RotationController()
-    {
-
-        //Quaternion targetRotation = Quaternion.Euler(sliderTiltX.value, transform.eulerAngles.y, phoneTiltZ * PlayerTilt);
-        //body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * PlayerRotation * -1));
-        body.AddForce(Vector3.right * thrustForcePlayer * phoneTiltZ * powerSlider.value, ForceMode.Acceleration);
+            yTransform = value;
+        }
         
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
-        //Debug.Log(targetRotation);
-    }*/
+    } 
+
+    private void OnAngleXSliderChanged(float value)
+    {
+        if(value <= 0.2f && value >= -0.2f)
+        {
+            xTransform = 0f;
+        }
+        else
+        {
+            xTransform = value;
+        }
+    }
+
+    private void gyroControll()
+    {
+        rotationPhone = Input.gyro.attitude.eulerAngles.z;
+        if(rotationPhone >= 252f && rotationPhone <= 288f){
+            zTransform = 0f;
+        }
+        else if(rotationPhone <= 360 && rotationPhone >= 180)
+        {
+            zTransform = rotationPhone - 270f;
+        }
+    }
+
+    private void RotationControll()
+    {
+        Vector3 rotation = transform.rotation.eulerAngles;
+        rotation.x = xTransform * rotationSpeedX * Time.deltaTime;
+        rotation.z = zTransform;
+        transform.rotation = Quaternion.Euler(rotation);
+
+        //Debug.Log("Å¼yroskop: " + Input.gyro.attitude.eulerAngles.z);
+    }
 }

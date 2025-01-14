@@ -422,8 +422,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218426990}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000030489367, y: -0.122183256, z: 0.0000000037534122, w: 0.9925076}
-  m_LocalPosition: {x: 0.72000027, y: -5.12, z: -5.164}
+  m_LocalRotation: {x: 0.14521313, y: 0, z: 0, w: 0.9894004}
+  m_LocalPosition: {x: 0.22000003, y: -4.8199997, z: -4.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -546,7 +546,7 @@ MonoBehaviour:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
+  CenterOnActivate: 0
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
@@ -610,10 +610,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.5, y: -0.4, z: 0}
+  ShoulderOffset: {x: 0.5, y: -0.1, z: 0}
   VerticalArmLength: 0.4
-  CameraSide: 1
-  CameraDistance: 2
+  CameraSide: 0.5
+  CameraDistance: 1
   AvoidObstacles:
     Enabled: 0
     CollisionFilter:
@@ -1160,14 +1160,14 @@ Transform:
   m_GameObject: {fileID: 833859258}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.180471, y: -2.9147158, z: 8.056896}
+  m_LocalPosition: {x: -2.54, y: 7.16, z: 3.5442019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 98814685}
   - {fileID: 2118094797}
   - {fileID: 218426991}
-  m_Father: {fileID: 1559655880}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &833859260
 MonoBehaviour:
@@ -1181,12 +1181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0473e5a236deb054cb819f208c95c995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltXSlider: {fileID: 2004065934}
-  powerSlider: {fileID: 1360352250}
-  player: {fileID: 98814688}
-  tiltZPlayer: 2
+  rb: {fileID: 98814691}
+  angleXSlider: {fileID: 2004065934}
+  thrustPowerSlider: {fileID: 1360352250}
   thrustForcePlayer: 15
-  rotationPlayer: 0
+  rotationSpeedX: 18
 --- !u!1 &879192082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,7 +1629,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 296497005}
   m_HandleRect: {fileID: 149513136}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: -1
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
@@ -1816,52 +1815,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1559655878
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1559655880}
-  - component: {fileID: 1559655879}
-  m_Layer: 0
-  m_Name: Physic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1559655879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559655878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 842bbd9fb27e04f4e93ec187997096fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Y: 9.81
---- !u!4 &1559655880
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559655878}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6404711, y: 10.074716, z: -4.5126944}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 833859259}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1608097127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,12 +1827,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0473e5a236deb054cb819f208c95c995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltXSlider: {fileID: 0}
-  powerSlider: {fileID: 0}
-  player: {fileID: 0}
-  tiltZPlayer: 2
-  thrustForcePlayer: 20
-  rotationPlayer: 0
+  rb: {fileID: 0}
+  angleXSlider: {fileID: 2004065934}
+  thrustPowerSlider: {fileID: 1360352250}
+  thrustForcePlayer: 30
+  rotationSpeedX: 0
 --- !u!850595691 &1682494714
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2093,8 +2045,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118094796}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000030489367, y: -0.122183256, z: 0.0000000037534122, w: 0.9925076}
-  m_LocalPosition: {x: 0.72000027, y: -5.12, z: -5.164}
+  m_LocalRotation: {x: 0.14521313, y: 0, z: 0, w: 0.9894004}
+  m_LocalPosition: {x: 0.22000003, y: -4.8199997, z: -4.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2140,4 +2092,4 @@ SceneRoots:
   - {fileID: 1063491186}
   - {fileID: 1208883405}
   - {fileID: 737076982}
-  - {fileID: 1559655880}
+  - {fileID: 833859259}
