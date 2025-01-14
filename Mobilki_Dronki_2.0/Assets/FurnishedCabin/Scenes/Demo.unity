@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: 0.223
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.164
+      value: -3.146
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -315,7 +315,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &98814692
@@ -330,13 +330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0473e5a236deb054cb819f208c95c995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 98814691}
   angleXSlider: {fileID: 2004065934}
   thrustPowerSlider: {fileID: 1360352250}
-  player: {fileID: 98814688}
-  tiltPhoneZ: 2
-  thrustForcePlayer: 0.2
+  tiltPhoneY: 2
+  thrustForcePlayer: 2
   rotationPlayer: 0
-  moveSpeed: 1
 --- !u!1 &149513135
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 218426990}
   serializedVersion: 2
   m_LocalRotation: {x: 0.09853776, y: 0, z: 0, w: 0.99513334}
-  m_LocalPosition: {x: 0.22000003, y: -5.7169995, z: -4.164}
+  m_LocalPosition: {x: 0.22300005, y: -5.717, z: -4.146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1178,7 +1177,7 @@ Transform:
   m_GameObject: {fileID: 833859258}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.54, y: 10.57, z: 3.5442019}
+  m_LocalPosition: {x: -2.54, y: 7.032, z: 3.5442019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1346,8 +1345,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1871360649114042, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013161809090, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 220394701964334022, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
+      propertyPath: m_Dering
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 191052, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
+    - {fileID: 102224, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
@@ -1579,6 +1592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360352251}
   - component: {fileID: 1360352250}
+  - component: {fileID: 1360352252}
   m_Layer: 5
   m_Name: Right Slider
   m_TagString: Untagged
@@ -1630,7 +1644,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 296497005}
   m_HandleRect: {fileID: 149513136}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: -1
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
@@ -1659,6 +1673,18 @@ RectTransform:
   m_AnchoredPosition: {x: 488.19995, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1360352252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360352249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa30db4af2edcb3e7a424fde4367e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1524741413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,6 +1913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004065933}
   - component: {fileID: 2004065934}
+  - component: {fileID: 2004065935}
   m_Layer: 5
   m_Name: Left Slider
   m_TagString: Untagged
@@ -1967,6 +1994,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2004065935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004065932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8ea917ec1b390e2ad0e779d9650212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustForceSlider: {fileID: 0}
 --- !u!1 &2027642760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,7 +2070,7 @@ Transform:
   m_GameObject: {fileID: 2118094796}
   serializedVersion: 2
   m_LocalRotation: {x: 0.09853776, y: 0, z: 0, w: 0.99513334}
-  m_LocalPosition: {x: 0.22000003, y: -5.7169995, z: -4.164}
+  m_LocalPosition: {x: 0.22300005, y: -5.717, z: -4.146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

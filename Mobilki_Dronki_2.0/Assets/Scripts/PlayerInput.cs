@@ -8,30 +8,37 @@ using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
+    public Rigidbody rb;
+
+    [Header("UI Elements")]
     public Slider angleXSlider;
     public Slider thrustPowerSlider;
 
-    public GameObject player;
+    [Header("Flight settings")]
+    [SerializeField]
+    private float thrustForcePlayer; //Siła lotu drona
+    [SerializeField]
+    private float rotationSpeedX; //Prędkość zmiany nachylenia w X
+    [SerializeField]
+    private float rotationSpeedY = 2f; //Czulosc przechylenia telefonu
+    [SerializeField]
+    private float rotationSpeedZ; //Prędkość zmiany nachylenia w Z
+    private float rotationPhone;
+    private float yTransform;
+    private float xTransform;
+    private float zTransform;
 
-    //Czu�o�� przechylenia telefonu
-    [SerializeField]
-    private float tiltPhoneZ = 2f;
-    //Moc drona
-    [SerializeField]
-    private float thrustForcePlayer = 0.2f;
-    //Czu�o�� przechylenia drona
-    [SerializeField]
-    private float rotationPlayer;
-    [SerializeField]
-    private float moveSpeed;
 
-    private Vector3 movement;
-    private Vector3 gyroOrientation;
+    Vector3 movement;
 
+    Vector3 force;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
         thrustPowerSlider.onValueChanged.AddListener(OnThrPowSliderChanged);
+        angleXSlider.onValueChanged.AddListener(OnAngleXSliderChanged);
 
         //W��czamy akcelerometr
         Input.gyro.enabled = true;
@@ -43,17 +50,57 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Vector3 currentPosition = transform.position;
-        currentPosition.y = Mathf.Lerp(currentPosition.y, thrustPowerSlider.value * thrustForcePlayer, Time.deltaTime * moveSpeed);
-        transform.position = currentPosition;
+        rb.AddRelativeForce(0f, yTransform * thrustForcePlayer * Time.deltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
+        gyroControll();
+        RotationControll();
     }
 
     private void OnThrPowSliderChanged(float value)
     {
+        if(value <= 0.2f && value >= -0.2)
+        {
+            yTransform = 0;
+        }
+        else
+        {
+            yTransform = value;
+        }
         
+    } 
+
+    private void OnAngleXSliderChanged(float value)
+    {
+        if(value <= 0.2f && value >= -0.2f)
+        {
+            xTransform = 0f;
+        }
+        else
+        {
+            xTransform = value;
+        }
     }
 
-    
+    private void gyroControll()
+    {
+        rotationPhone = Input.gyro.attitude.eulerAngles.z;
+        if(rotationPhone >= 252f && rotationPhone <= 288f){
+            zTransform = 0f;
+        }
+        else if(rotationPhone <= 360 && rotationPhone >= 180)
+        {
+            zTransform = rotationPhone - 270f;
+        }
+    }
+
+    private void RotationControll()
+    {
+        Vector3 rotation = transform.rotation.eulerAngles;
+        rotation.x = xTransform * rotationSpeedX * Time.deltaTime;
+        rotation.z = zTransform;
+        transform.rotation = Quaternion.Euler(rotation);
+
+        Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
+    }
 }
