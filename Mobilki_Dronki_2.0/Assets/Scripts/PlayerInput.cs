@@ -16,14 +16,16 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private float rotationSpeedX = 18f; //Prędkość zmiany nachylenia w X
     /*[SerializeField]
-    private float rotationSpeedY = 20f; //Czulosc przechylenia telefonu
+    private float rotationSpeedY = 20f; //Czulosc przechylenia telefonu */
     [SerializeField]
-    private float rotationSpeedZ = 20f; //Prędkość zmiany nachylenia w Z */
+    private float rotationSpeedZ = 20f; //Prędkość zmiany nachylenia w Z
+    
     private float rotationPhone;
     private float yTransform;
     private float xTransform;
     private float zTransform;
 
+    
 
     private void Start()
     {
@@ -32,7 +34,7 @@ public class PlayerInput : MonoBehaviour
         thrustPowerSlider.onValueChanged.AddListener(OnThrPowSliderChanged);
         angleXSlider.onValueChanged.AddListener(OnAngleXSliderChanged);
 
-        //W��czamy akcelerometr
+        //Wlaczamy akcelerometr
         Input.gyro.enabled = true;
 
         if (!SystemInfo.supportsGyroscope)
@@ -51,8 +53,8 @@ public class PlayerInput : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        rb.AddRelativeForce(0f, yTransform * thrustForcePlayer * Time.deltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
+    {        
+        rb.AddRelativeForce(0f, yTransform * thrustForcePlayer * Time.fixedDeltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
         gyroControll();
         RotationControll();
     }
@@ -72,11 +74,11 @@ public class PlayerInput : MonoBehaviour
 
     private void OnAngleXSliderChanged(float value)
     {
-        if(value <= 0.2f && value >= -0.2f)
+        if(value <= 9f && value >= -9f)
         {
             xTransform = 0f;
         }
-        else
+        else if(value > 9f || value < -9f)
         {
             xTransform = value;
         }
@@ -85,20 +87,25 @@ public class PlayerInput : MonoBehaviour
     private void gyroControll()
     {
         rotationPhone = Input.gyro.attitude.eulerAngles.z;
-        if(rotationPhone >= 252f && rotationPhone <= 288f){
+        if(rotationPhone >= 255f && rotationPhone <= 285f){
             zTransform = 0f;
         }
-        else if(rotationPhone <= 360 && rotationPhone >= 180)
+        else if(rotationPhone <= 360 && rotationPhone > 285f || rotationPhone < 255f && rotationPhone >= 180)
         {
             zTransform = rotationPhone - 270f;
         }
+
+        Debug.Log(rotationPhone);
     }
 
     private void RotationControll()
     {
+        Quaternion stabilzeRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         Vector3 rotation = transform.rotation.eulerAngles;
-        rotation.x = xTransform * rotationSpeedX * Time.deltaTime;
-        rotation.z = zTransform;
+
+        rotation.x = xTransform * rotationSpeedX * Time.fixedDeltaTime;
+        rotation.z = zTransform * rotationSpeedZ * Time.fixedDeltaTime;
+
         transform.rotation = Quaternion.Euler(rotation);
 
         //Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
