@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
     private float xTransform;
     private float zTransform;
 
+    
 
     private void Start()
     {
@@ -32,7 +33,10 @@ public class PlayerInput : MonoBehaviour
         thrustPowerSlider.onValueChanged.AddListener(OnThrPowSliderChanged);
         angleXSlider.onValueChanged.AddListener(OnAngleXSliderChanged);
 
-        //W��czamy akcelerometr
+        thrustPowerSlider.onValueChanged.AddListener(OnThrPowSliderChanged);
+        angleXSlider.onValueChanged.AddListener(OnAngleXSliderChanged);
+
+        //Wlaczamy akcelerometr
         Input.gyro.enabled = true;
 
         if (!SystemInfo.supportsGyroscope)
