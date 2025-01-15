@@ -101,8 +101,8 @@ public class PlayerInput : MonoBehaviour
     private void RotationControll()
     {
         Vector3 rotation = transform.rotation.eulerAngles;
-        rotation.x = xTransform * rotationSpeedX * Time.fixedDeltaTime;
-        rotation.z = zTransform * rotationSpeedZ * Time.fixedDeltaTime;
+        rotation.x = xTransform * rotationSpeedX * Time.deltaTime;
+        rotation.z = zTransform;
         transform.rotation = Quaternion.Euler(rotation);
 
         Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
