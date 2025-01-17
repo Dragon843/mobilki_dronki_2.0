@@ -22,6 +22,7 @@ public class PlayerInput : MonoBehaviour
     private float playerAngleZ = 65f; //Maksymalne nachylenie w osi Z
     [SerializeField]
     private float playerRotateZ;
+    public float yTransformRot;
 
     private float phoneRotation; //
     private float yTransformVec;
@@ -90,26 +91,6 @@ public class PlayerInput : MonoBehaviour
         {
             xTransformRot = value;
         }
-    }
-
-    private void OnButtonLeftDown()
-    {
-        buttonLeftPressed = true;
-    }
-
-    private void OnButtonLeftUp()
-    {
-
-    }
-
-    private void OnButtonRightDown()
-    {
-
-    }
-
-    private void OnButtonRightUp()
-    {
-        
     }
 
     private void OnClickLeftButton()
