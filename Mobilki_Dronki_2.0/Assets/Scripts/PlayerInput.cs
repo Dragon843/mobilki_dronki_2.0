@@ -1,4 +1,3 @@
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,42 +8,45 @@ public class PlayerInput : MonoBehaviour
 
     [Header("UI Elements")]
     public Slider sliderAngleX;
-    public Slider sliderThrustPower;
+    public Slider sliderThrustFower;
 
     [Header("Flight settings")]
     [SerializeField]
-    private float playerThrustForce = 30f; //Siła lotu drona
+    private float playerThrustForce = 30f; // Siła lotu drona
     [SerializeField]
-    private float playerAngleX = 65f; //Maksymalne nachylenie w osi X
+    private float playerAngleX = 20f; // Maksymalne nachylenie w osi X
     [SerializeField]
-    private float playerAngleZ = 65f; //Maksymalne nachylenie w osi Z
-    [SerializeField]
-    private float playerRotateY = 40f;
+    private float playerRotateY = 40f; // Prędkość zmiany obrotu w osi Y
 
-    private float phoneRotation; //
-    private float yTransformVec;
-    private float xTransformRot;
-    private float zTransformRot;
+    /* [SerializeField]
+    private float playerAngleZ = 20f; // Maksymalne nachylenie w osi Z */
 
-    private Vector3 droneRotation;
+    //private float phoneRotation; // Zmienna do przetrzymywania wartości żyroskopu na osi Z
+
+    private float yTransformVec; // Zmienna przechowująca wartość procentową sliderThrustPower
+    private float xTransformRot; // Zmienna przechowująca wartość procentową sliderAngleX
+
+    //private float zTransformRot;
+
+    private Vector3 droneRotation; // Wektor obrotu w przestrzeniu 3D dla drona
 
     private void Start()
     {
         playerBody = GetComponent<Rigidbody>();
 
-        sliderThrustPower.onValueChanged.AddListener(OnThrPowSliderChanged);
+        sliderThrustFower.onValueChanged.AddListener(OnThrPowSliderChanged);
         sliderAngleX.onValueChanged.AddListener(OnAngleXSliderChanged);
 
         droneRotation = transform.rotation.eulerAngles;
 
-        //Wlaczamy akcelerometr
+        /* // Wlaczamy akcelerometr
         Input.gyro.enabled = true;
 
         if (!SystemInfo.supportsGyroscope)
         {
             Debug.LogError("Gyroscope not supported on this device!");
             return;
-        }
+        } */
         
     }
 
@@ -59,10 +61,11 @@ public class PlayerInput : MonoBehaviour
     private void FixedUpdate()
     {        
         playerBody.AddRelativeForce(0f, yTransformVec * playerThrustForce * Time.fixedDeltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
-        gyroControll();
+        //gyroControll();
         RotationControll();
     }
 
+    // Event Listener dla sliderThrustForce
     private void OnThrPowSliderChanged(float value)
     {
         if(value <= 0.2f && value >= -0.2)
@@ -76,6 +79,7 @@ public class PlayerInput : MonoBehaviour
         
     } 
 
+    // Event Listener dla sliderAngleX
     private void OnAngleXSliderChanged(float value)
     {
         if(value <= 0.2f && value >= -0.2f)
@@ -88,7 +92,7 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void gyroControll()
+    /*private void gyroControll()
     {
         phoneRotation = Input.gyro.attitude.eulerAngles.z;
         if(phoneRotation >= 255f && phoneRotation <= 285f){
@@ -100,8 +104,9 @@ public class PlayerInput : MonoBehaviour
         }
 
         Debug.Log(phoneRotation);
-    }
+    }*/
 
+    // Funkcja aktywująca się przy przyciśnięciu lewego przycisku
     public void OnDownLeftButton()
     {
         droneRotation.y -= playerRotateY * Time.fixedDeltaTime;
@@ -109,6 +114,7 @@ public class PlayerInput : MonoBehaviour
         transform.rotation = Quaternion.Euler(droneRotation);
     }
 
+    // Funkcja Aktywująca się przy przyciśnięciu prawego przycisku
     public void OnDownRightButton()
     {
         droneRotation.y += playerRotateY * Time.fixedDeltaTime;
@@ -116,16 +122,15 @@ public class PlayerInput : MonoBehaviour
         transform.rotation = Quaternion.Euler(droneRotation);
     }
 
+    // Funkcja kontrolująca obrót drona
     private void RotationControll()
     {
-        //Quaternion stabilzeRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-        
         droneRotation.x = xTransformRot * playerAngleX * 45f * Time.fixedDeltaTime;
-        droneRotation.z = zTransformRot * playerAngleZ * Time.fixedDeltaTime;
+        //droneRotation.z = zTransformRot * playerAngleZ * Time.fixedDeltaTime;
         
         playerBody.rotation = Quaternion.Euler(droneRotation);
         
         //Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
-        Debug.Log("transform.rotation: " + transform.rotation);
+        //Debug.Log("transform.rotation: " + transform.rotation);
     }
 }
