@@ -1,100 +1,136 @@
-using System;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerInput : MonoBehaviour
 {
-    Gravity gravity;
+    public Rigidbody playerBody;
 
-    [SerializeField]
-    Slider tiltXSlider;
-    [SerializeField]
-    Slider powerSlider;
+    [Header("UI Elements")]
+    public Slider sliderAngleX;
+    public Slider sliderThrustFower;
 
+    [Header("Flight settings")]
     [SerializeField]
-    GameObject player;
-
-    //Czu�o�� przechylenia telefonu
+    private float playerThrustForce = 30f; // Siła lotu drona
     [SerializeField]
-    float tiltZPlayer = 2f;
-    //Moc drona
+    private float playerAngleX = 20f; // Maksymalne nachylenie w osi X
     [SerializeField]
-    float thrustForcePlayer = 20f;
-    //Czu�o�� przechylenia drona
-    [SerializeField]
-    float rotationPlayer;
+    private float playerRotateY = 40f; // Prędkość zmiany obrotu w osi Y
 
-    private Rigidbody body;
+    /* [SerializeField]
+    private float playerAngleZ = 20f; // Maksymalne nachylenie w osi Z */
 
-    private Vector3 movement;
-    
+    //private float phoneRotation; // Zmienna do przetrzymywania wartości żyroskopu na osi Z
 
+    private float yTransformVec; // Zmienna przechowująca wartość procentową sliderThrustPower
+    private float xTransformRot; // Zmienna przechowująca wartość procentową sliderAngleX
+
+    //private float zTransformRot;
+
+    private Vector3 droneRotation; // Wektor obrotu w przestrzeniu 3D dla drona
 
     private void Start()
     {
-        body = player.GetComponentInChildren<Rigidbody>();
-        gravity = player.GetComponentInParent<Gravity>();
+        playerBody = GetComponent<Rigidbody>();
 
-        //W��czamy akcelerometr
+        sliderThrustFower.onValueChanged.AddListener(OnThrPowSliderChanged);
+        sliderAngleX.onValueChanged.AddListener(OnAngleXSliderChanged);
+
+        droneRotation = transform.rotation.eulerAngles;
+
+        /* // Wlaczamy akcelerometr
         Input.gyro.enabled = true;
 
         if (!SystemInfo.supportsGyroscope)
         {
             Debug.LogError("Gyroscope not supported on this device!");
             return;
+        } */
+        
+    }
+
+    private void Update()
+    {
+        if (transform.position.y <= -10f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
     private void FixedUpdate()
-    {
-        
-        movement = new Vector3(Input.gyro.gravity.x * tiltZPlayer, powerSlider.value, tiltXSlider.value);
-        movement.Normalize();
-
-        body.AddForce(CalculateTiltForceX(), CalculateThrustForce(), CalculateTiltForceZ(),ForceMode.Acceleration);
-        //RotationController();
-
-        //Debug.Log("Body speed: " + body.GetAccumulatedForce());
-        Debug.Log("Ruch znormalizowany: " + movement);
+    {        
+        playerBody.AddRelativeForce(0f, yTransformVec * playerThrustForce * Time.fixedDeltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
+        //gyroControll();
+        RotationControll();
     }
 
-    private float CalculateThrustForce()
+    // Event Listener dla sliderThrustForce
+    private void OnThrPowSliderChanged(float value)
     {
-        /*
-        if (thrustForcePlayer - gravity.Y <= gravity.Y)
+        if(value <= 0.2f && value >= -0.2)
         {
-            return movement.y * thrustForcePlayer;
+            yTransformVec = 0;
         }
         else
         {
-            return (movement.y * (thrustForcePlayer - gravity.Y)) + gravity.Y;
-        }*/
-
-        return movement.y * thrustForcePlayer;
-    }
-
-    private float CalculateTiltForceZ()
-    {
-        return movement.z * thrustForcePlayer * movement.y;
-    }
-
-    private float CalculateTiltForceX()
-    {
-        return movement.x * thrustForcePlayer * movement.y;
-    }
-
-    /*private void RotationController()
-    {
-
-        //Quaternion targetRotation = Quaternion.Euler(sliderTiltX.value, transform.eulerAngles.y, phoneTiltZ * PlayerTilt);
-        //body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * PlayerRotation * -1));
-        body.AddForce(Vector3.right * thrustForcePlayer * phoneTiltZ * powerSlider.value, ForceMode.Acceleration);
+            yTransformVec = value;
+        }
         
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
-        //Debug.Log(targetRotation);
+    } 
+
+    // Event Listener dla sliderAngleX
+    private void OnAngleXSliderChanged(float value)
+    {
+        if(value <= 0.2f && value >= -0.2f)
+        {
+            xTransformRot = 0f;
+        }
+        else
+        {
+            xTransformRot = value;
+        }
+    }
+
+    /*private void gyroControll()
+    {
+        phoneRotation = Input.gyro.attitude.eulerAngles.z;
+        if(phoneRotation >= 255f && phoneRotation <= 285f){
+            zTransformRot = 0f;
+        }
+        else if(phoneRotation <= 360 && phoneRotation > 285f || phoneRotation < 255f && phoneRotation >= 180)
+        {
+            zTransformRot = phoneRotation - 270f;
+        }
+
+        Debug.Log(phoneRotation);
     }*/
+
+    // Funkcja aktywująca się przy przyciśnięciu lewego przycisku
+    public void OnDownLeftButton()
+    {
+        droneRotation.y -= playerRotateY * Time.fixedDeltaTime;
+
+        transform.rotation = Quaternion.Euler(droneRotation);
+    }
+
+    // Funkcja Aktywująca się przy przyciśnięciu prawego przycisku
+    public void OnDownRightButton()
+    {
+        droneRotation.y += playerRotateY * Time.fixedDeltaTime;
+
+        transform.rotation = Quaternion.Euler(droneRotation);
+    }
+
+    // Funkcja kontrolująca obrót drona
+    private void RotationControll()
+    {
+        droneRotation.x = xTransformRot * playerAngleX * 45f * Time.fixedDeltaTime;
+        //droneRotation.z = zTransformRot * playerAngleZ * Time.fixedDeltaTime;
+        
+        playerBody.rotation = Quaternion.Euler(droneRotation);
+        
+        //Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
+        //Debug.Log("transform.rotation: " + transform.rotation);
+    }
 }
