@@ -114,10 +114,10 @@ TextureImporter:
         in a bright room with another drone_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 1024
-        height: 1019
+        x: 3
+        y: 0
+        width: 1015
+        height: 1020
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,8 +126,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 898d88130c662774f99d6d57cd2c5314
-      internalID: 869222791
+      spriteID: 9092c6bcc112f4243bc4236b1defb0b1
+      internalID: 41643647
       vertices: []
       indices: 
       edges: []
@@ -136,7 +136,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 076fe72fbf5483b48b9fa93cb8641f85
+    spriteID: fac2b672cb39e90408f36b128ec565f6
     internalID: 0
     vertices: []
     indices: 
@@ -146,7 +146,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      A drone flying inside a house in the form of a digital painting 2400x1080 in a bright room with another drone_0: 869222791
+      A drone flying inside a house in the form of a digital painting 2400x1080 in a bright room with another drone_0: 41643647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
