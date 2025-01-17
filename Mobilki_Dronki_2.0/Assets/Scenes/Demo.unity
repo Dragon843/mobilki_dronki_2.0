@@ -2507,10 +2507,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 98814691}
   sliderAngleX: {fileID: 2004065934}
-  sliderThrustPower: {fileID: 1360352250}
+  sliderThrustFower: {fileID: 1360352250}
   playerThrustForce: 40
   playerAngleX: 20
-  playerAngleZ: 20
   playerRotateY: 40
 --- !u!850595691 &1682494714
 LightingSettings:
