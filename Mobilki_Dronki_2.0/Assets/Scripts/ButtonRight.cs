@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonLeft : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ButtonRight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public PlayerInput player;
 
@@ -21,7 +21,7 @@ public class ButtonLeft : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if(isPressed)
         {
-            player.OnDownLeftButton();
+            player.OnDownRightButton();
         }
     }
 }
