@@ -2633,6 +2633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c902222f1d889ec41901f4b636560fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 0}
+  elapsedTime: 0
 --- !u!114 &737076984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6367,7 +6369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 98814691}
-  waypointsObject: {fileID: 445880923}
+  waypointsObject: {fileID: 0}
   currentWaypoint: 18
   timer: {fileID: 0}
   sliderAngleX: {fileID: 2004065934}
