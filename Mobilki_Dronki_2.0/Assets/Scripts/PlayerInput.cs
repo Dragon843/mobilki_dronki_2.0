@@ -5,9 +5,6 @@ using UnityEngine.UI;
 public class PlayerInput : MonoBehaviour
 {
     public Rigidbody playerBody;
-    public Waypoints waypointsObject;
-    public int currentWaypoint = 18;
-    public Timer timer;
 
     [Header("UI Elements")]
     public Slider sliderAngleX;
@@ -35,14 +32,13 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        currentWaypoint = 18;
         playerBody = GetComponent<Rigidbody>();
 
         sliderThrustFower.onValueChanged.AddListener(OnThrPowSliderChanged);
         sliderAngleX.onValueChanged.AddListener(OnAngleXSliderChanged);
 
         droneRotation = transform.rotation.eulerAngles;
-
+        
         /* // Wlaczamy akcelerometr
         Input.gyro.enabled = true;
 
@@ -137,21 +133,5 @@ public class PlayerInput : MonoBehaviour
         //Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
         //Debug.Log("transform.rotation: " + transform.rotation);
 
-        //Sprawdzanie czy koniec wyjściugu
-         Transform targetWaypoint = waypointsObject.GetWaypoint(currentWaypoint);
-
-        // Oblicz kierunek do waypointa
-        Vector3 direction = (targetWaypoint.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, targetWaypoint.position);
-
-        if (distance < 0.3f)
-        {
-            Debug.Log($"Osiągnięto waypoint {currentWaypoint}: {targetWaypoint.name}");
-            if(targetWaypoint.name == "Waypoint19"){
-                float timeAtWaypoint = timer.GetElapsedTime();
-                Debug.Log($"Czas to: {timeAtWaypoint} s");  
-                return;
-            }
-        }
     }
 }

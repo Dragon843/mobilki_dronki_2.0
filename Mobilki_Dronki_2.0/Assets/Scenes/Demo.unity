@@ -3843,7 +3843,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3856,7 +3856,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962716019}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e37678e3127b5fd4b9176fa5b8aad97e, type: 3}
   m_Name: 
@@ -5953,7 +5953,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.55, y: 0, z: 0}
 --- !u!114 &1418554133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6384,6 +6384,7 @@ MonoBehaviour:
   waypointsObject: {fileID: 0}
   currentWaypoint: 18
   timer: {fileID: 0}
+  hoop: {fileID: 696010643}
   sliderAngleX: {fileID: 2004065934}
   sliderThrustFower: {fileID: 1360352250}
   playerThrustForce: 40
@@ -6404,7 +6405,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -7623,9 +7624,9 @@ SceneRoots:
   - {fileID: 737076982}
   - {fileID: 833859259}
   - {fileID: 445880924}
+  - {fileID: 2129411986}
   - {fileID: 1387326092}
   - {fileID: 1189366029}
-  - {fileID: 2129411986}
   - {fileID: 1067890281}
   - {fileID: 1418554135}
   - {fileID: 98036807}
