@@ -9,8 +9,13 @@ public class wygrana : MonoBehaviour {
 
    public void OnTriggerEnter(Collider other) 
    {
-        if (other.CompareTag("Dron")) {
-            SceneManager.LoadScene("menu");
+        if (other.CompareTag("Dron"))
+        {
+            SceneManager.LoadScene("wygrales");
+        }
+        else if (other.CompareTag("DronBOT")) 
+        {
+            SceneManager.LoadScene("przegrales");
         }
 
    } 
