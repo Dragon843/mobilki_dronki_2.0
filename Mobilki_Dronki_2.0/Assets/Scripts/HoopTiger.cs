@@ -9,7 +9,6 @@ public class HoopTrigger : MonoBehaviour
         // SprawdŸ, czy obiekt, który wszed³ w trigger, ma tag "Drone"
         if (other.CompareTag("Dron"))
         {
-            Debug.Log($"Dron przelecia³ przez obrêcz: {gameObject.name}");
             hoopManager.HoopPassed(gameObject); // Powiadom HoopManager o przejœciu
         }
     }

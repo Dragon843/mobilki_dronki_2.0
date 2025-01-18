@@ -30,6 +30,11 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 droneRotation; // Wektor obrotu w przestrzeniu 3D dla drona
 
+    [Header("Waypoints")]
+    public Waypoints waypoints; // Referencja do skryptu Waypoints
+    public Timer timer; // Referencja do skryptu Timer
+    private bool flag = false;
+
     private void Start()
     {
         playerBody = GetComponent<Rigidbody>();
@@ -47,6 +52,16 @@ public class PlayerInput : MonoBehaviour
             Debug.LogError("Gyroscope not supported on this device!");
             return;
         } */
+
+        // Znajdź skrypty Waypoints i Timer w scenie, jeśli nie są przypisane w inspektorze
+        if (waypoints == null)
+        {
+            waypoints = FindObjectOfType<Waypoints>();
+        }
+        if (timer == null)
+        {
+            timer = FindObjectOfType<Timer>();
+        }
         
     }
 
@@ -56,6 +71,8 @@ public class PlayerInput : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        // Sprawdź odległość od waypointa
+        CheckWaypointDistance();
     }
 
     private void FixedUpdate()
@@ -63,6 +80,29 @@ public class PlayerInput : MonoBehaviour
         playerBody.AddRelativeForce(0f, yTransformVec * playerThrustForce * Time.fixedDeltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
         //gyroControll();
         RotationControll();
+    }
+
+    // Sprawdź odległość od waypointa o indeksie 18
+    private void CheckWaypointDistance()
+    {
+        if (waypoints == null || timer == null)
+        {
+            Debug.LogError("Brak przypisanego skryptu Waypoints lub Timer!");
+            return;
+        }
+
+        // Pobierz waypoint 
+        Transform waypoint19 = waypoints.GetWaypoint(18);
+
+        // Oblicz odległość między dronem a waypointem
+        float distance = Vector3.Distance(transform.position, waypoint19.position);
+        int counterHoop = HoopManager.counter;
+        if (distance < 0.3f && !flag && counterHoop >= 6)
+        {
+            float elapsedTime = timer.GetElapsedTime();
+            Debug.Log($"Waypoint 18 osiągnięty! Czas: {elapsedTime:F2} sekund.");
+            flag = true;
+        }
     }
 
     // Event Listener dla sliderThrustForce
