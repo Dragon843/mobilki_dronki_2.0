@@ -17,6 +17,8 @@ public class HoopManager : MonoBehaviour
         {
             passedHoops.Add(hoop); // Oznacz obrêcz jako pokonan¹
             counter++; // Zwiêksz
+            HoopTiger hoopTiger = hoop.GetComponent<HoopTiger>();
+            hoopTiger.DisableHoop(); // Wy³¹cz obrêcz
         }
     }
 }

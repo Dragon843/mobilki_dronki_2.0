@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HoopTrigger : MonoBehaviour
+public class HoopTiger : MonoBehaviour
 {
     public HoopManager hoopManager; // Przypisz HoopManager w inspektorze
 
@@ -11,5 +11,10 @@ public class HoopTrigger : MonoBehaviour
         {
             hoopManager.HoopPassed(gameObject); // Powiadom HoopManager o przejœciu
         }
+    }
+
+    public void DisableHoop()
+    {
+        gameObject.SetActive(false); // Wy³¹cz obiekt
     }
 }
