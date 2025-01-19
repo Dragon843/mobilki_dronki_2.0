@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
     public Rigidbody playerBody;
     public Waypoints waypointsObject;
     public int currentWaypoint = 18;
-    public Timer timer;
 
     [Header("UI Elements")]
     public Slider sliderAngleX;
