@@ -11,21 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo.unity
     guid: ebb6b8d4f7b303d4f84517b401fc18cd
-  - enabled: 0
-    path: Assets/FurnishedCabin/Scenes/DemoGryz.unity
-    guid: 83a23d6e26663c1479ca6d177c5d11d7
   - enabled: 1
     path: Assets/Scenes/zasady.unity
     guid: 5dc764cde25e04048b1d6d2db43b36b9
   - enabled: 1
     path: Assets/Scenes/autorzy.unity
     guid: 1997447467a560b4d8b7a669a40bfe78
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/FurnishedCabin/Scenes/DemoGryz.unity
-    guid: 83a23d6e26663c1479ca6d177c5d11d7
   - enabled: 1
     path: Assets/Scenes/trening.unity
     guid: a3b374b48149ca94ebac350054734e0d
