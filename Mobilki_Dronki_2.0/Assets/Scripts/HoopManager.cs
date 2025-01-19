@@ -16,7 +16,8 @@ public class HoopManager : MonoBehaviour
         if (hoops.Contains(hoop) && !passedHoops.Contains(hoop))
         {
             passedHoops.Add(hoop); // Oznacz obrêcz jako pokonan¹
-            counter++; // Zwiêksz licznik
+            counter++; // Zwiêksz
+            Debug.Log(counter);
         }
     }
 }
