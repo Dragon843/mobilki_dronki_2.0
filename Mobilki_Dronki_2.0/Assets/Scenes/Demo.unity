@@ -6656,7 +6656,7 @@ MonoBehaviour:
   sliderThrustFower: {fileID: 1360352250}
   playerThrustForce: 40
   playerAngleX: 20
-  playerRotateY: 40
+  playerRotateY: 140
   waypoints: {fileID: 445880923}
   timer: {fileID: 600274048}
 --- !u!65 &1608097130
