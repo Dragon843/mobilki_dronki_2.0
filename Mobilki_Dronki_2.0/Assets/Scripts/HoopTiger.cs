@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HoopTrigger : MonoBehaviour
+public class HoopTiger : MonoBehaviour
 {
     public HoopManager hoopManager; // Przypisz HoopManager w inspektorze
 
@@ -9,8 +9,12 @@ public class HoopTrigger : MonoBehaviour
         // SprawdŸ, czy obiekt, który wszed³ w trigger, ma tag "Drone"
         if (other.CompareTag("DronAI"))
         {
-            Debug.Log($"Dron przelecia³ przez obrêcz: {gameObject.name}");
             hoopManager.HoopPassed(gameObject); // Powiadom HoopManager o przejœciu
         }
+    }
+
+    public void DisableHoop()
+    {
+        gameObject.SetActive(false); // Wy³¹cz obiekt
     }
 }

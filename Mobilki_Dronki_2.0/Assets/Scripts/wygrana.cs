@@ -8,7 +8,8 @@ public class wygrana : MonoBehaviour {
 
    public void OnTriggerEnter(Collider other) 
    {
-        if (other.CompareTag("Dron"))
+        int countHoop = HoopManager.counter;
+        if (other.CompareTag("Dron") && countHoop >= 6)
         {
             SceneManager.LoadScene("wygrales");
         }
@@ -16,7 +17,6 @@ public class wygrana : MonoBehaviour {
         {
             SceneManager.LoadScene("przegrales");
         }
-
    } 
 
 }
