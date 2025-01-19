@@ -174,22 +174,5 @@ public class PlayerInput : MonoBehaviour
         
         //Debug.Log("żyroskop: " + Input.gyro.attitude.eulerAngles.z);
         //Debug.Log("transform.rotation: " + transform.rotation);
-
-        //Sprawdzanie czy koniec wyjściugu
-         Transform targetWaypoint = waypointsObject.GetWaypoint(currentWaypoint);
-
-        // Oblicz kierunek do waypointa
-        Vector3 direction = (targetWaypoint.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, targetWaypoint.position);
-
-        if (distance < 0.3f)
-        {
-            Debug.Log($"Osiągnięto waypoint {currentWaypoint}: {targetWaypoint.name}");
-            if(targetWaypoint.name == "Waypoint19"){
-                float timeAtWaypoint = timer.GetElapsedTime();
-                Debug.Log($"Czas to: {timeAtWaypoint} s");  
-                return;
-            }
-        }
     }
 }

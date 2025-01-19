@@ -43,6 +43,7 @@ public class AIDroneController : MonoBehaviour
         {
             Debug.Log($"Osiągnięto waypoint {currentWaypoint}: {targetWaypoint.name}");
             rb = GetComponent<Rigidbody>();
+           
             if(targetWaypoint.name == "Waypoint19" && !hasReachedWaypoint19) {
                 rb.linearVelocity = Vector3.zero; 
                 rb.useGravity = true; 

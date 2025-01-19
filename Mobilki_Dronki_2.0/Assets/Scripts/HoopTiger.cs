@@ -7,7 +7,7 @@ public class HoopTiger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // SprawdŸ, czy obiekt, który wszed³ w trigger, ma tag "Drone"
-        if (other.CompareTag("DronAI"))
+        if (other.CompareTag("Dron"))
         {
             hoopManager.HoopPassed(gameObject); // Powiadom HoopManager o przejœciu
         }
