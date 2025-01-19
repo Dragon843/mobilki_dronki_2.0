@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ebb6b8d4f7b303d4f84517b401fc18cd
+timeCreated: 1473674062
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 71426
+  packageName: Furnished Cabin
+  packageVersion: 1.3
+  assetPath: Assets/FurnishedCabin/Scenes/Demo.unity
+  uploadId: 483043
