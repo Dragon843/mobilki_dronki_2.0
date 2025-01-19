@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class PlayerInput : MonoBehaviour
 
     [Header("UI Elements")]
     public Slider sliderAngleX;
-    public Slider sliderThrustFower;
+    public Slider sliderThrustForce;
 
     [Header("Flight settings")]
     [SerializeField]
@@ -20,29 +21,28 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private float playerRotateY = 140f; // Prędkość zmiany obrotu w osi Y
 
-    /* [SerializeField]
-    private float playerAngleZ = 20f; // Maksymalne nachylenie w osi Z */
-
-    //private float phoneRotation; // Zmienna do przetrzymywania wartości żyroskopu na osi Z
-
-    private float yTransformVec; // Zmienna przechowująca wartość procentową sliderThrustPower
-    private float xTransformRot; // Zmienna przechowująca wartość procentową sliderAngleX
-
-    //private float zTransformRot;
-
-    private Vector3 droneRotation; // Wektor obrotu w przestrzeniu 3D dla drona
-
     [Header("Waypoints")]
     public Waypoints waypoints; // Referencja do skryptu Waypoints
     public Timer timer; // Referencja do skryptu Timer
     private bool flag = false;
+
+    /* [Header("Test")]
+    [SerializeField]
+    private float playerAngleZ = 20f; // Maksymalne nachylenie w osi Z
+    private float phoneRotation; // Zmienna do przetrzymywania wartości żyroskopu na osi Z
+    private float zTransformRot; */
+
+    private float yTransformVec; // Zmienna przechowująca wartość sliderThrustPower
+    private float xTransformRot; // Zmienna przechowująca wartość sliderAngleX
+
+    private Vector3 droneRotation; // Wektor obrotu w przestrzeniu 3D dla drona
 
     private void Start()
     {
         currentWaypoint = 18;
         playerBody = GetComponent<Rigidbody>();
 
-        sliderThrustFower.onValueChanged.AddListener(OnThrPowSliderChanged);
+        sliderThrustForce.onValueChanged.AddListener(OnThrPowSliderChanged);
         sliderAngleX.onValueChanged.AddListener(OnAngleXSliderChanged);
 
         droneRotation = transform.rotation.eulerAngles;
@@ -118,8 +118,7 @@ public class PlayerInput : MonoBehaviour
         else
         {
             yTransformVec = value;
-        }
-        
+        }  
     } 
 
     // Event Listener dla sliderAngleX

@@ -6655,7 +6655,7 @@ MonoBehaviour:
   waypointsObject: {fileID: 0}
   currentWaypoint: 18
   sliderAngleX: {fileID: 2004065934}
-  sliderThrustFower: {fileID: 1360352250}
+  sliderThrustForce: {fileID: 1360352250}
   playerThrustForce: 40
   playerAngleX: 20
   playerRotateY: 140
