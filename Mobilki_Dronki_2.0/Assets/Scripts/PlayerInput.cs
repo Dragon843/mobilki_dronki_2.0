@@ -64,7 +64,7 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {        
-        playerBody.AddRelativeForce(0f, yTransformVec * playerThrustForce * Time.fixedDeltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
+        playerBody.AddRelativeForce(0f, yTransformVec * playerThrustForce * Time.deltaTime - Physics.gravity.y, 0f, ForceMode.Acceleration);
         //gyroControll();
         RotationControll();
     }
@@ -113,7 +113,7 @@ public class PlayerInput : MonoBehaviour
     // Funkcja aktywująca się przy przyciśnięciu lewego przycisku
     public void OnDownLeftButton()
     {
-        droneRotation.y -= playerRotateY * Time.fixedDeltaTime;
+        droneRotation.y -= playerRotateY * Time.deltaTime;
 
         transform.rotation = Quaternion.Euler(droneRotation);
     }
@@ -121,7 +121,7 @@ public class PlayerInput : MonoBehaviour
     // Funkcja Aktywująca się przy przyciśnięciu prawego przycisku
     public void OnDownRightButton()
     {
-        droneRotation.y += playerRotateY * Time.fixedDeltaTime;
+        droneRotation.y += playerRotateY * Time.deltaTime;
 
         transform.rotation = Quaternion.Euler(droneRotation);
     }
@@ -129,7 +129,7 @@ public class PlayerInput : MonoBehaviour
     // Funkcja kontrolująca obrót drona
     private void RotationControll()
     {
-        droneRotation.x = xTransformRot * playerAngleX * 45f * Time.fixedDeltaTime;
+        droneRotation.x = xTransformRot * playerAngleX * 45f * Time.deltaTime;
         //droneRotation.z = zTransformRot * playerAngleZ * Time.fixedDeltaTime;
         
         playerBody.rotation = Quaternion.Euler(droneRotation);
