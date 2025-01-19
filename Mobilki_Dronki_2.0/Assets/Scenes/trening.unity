@@ -945,7 +945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -649, y: 389}
+  m_AnchoredPosition: {x: -1058, y: 389}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &600274046
@@ -2807,7 +2807,7 @@ MonoBehaviour:
   waypointsObject: {fileID: 0}
   currentWaypoint: 18
   sliderAngleX: {fileID: 2004065934}
-  sliderThrustFower: {fileID: 1360352250}
+  sliderThrustForce: {fileID: 1360352250}
   playerThrustForce: 40
   playerAngleX: 20
   playerRotateY: 140
@@ -2958,7 +2958,7 @@ RectTransform:
   m_GameObject: {fileID: 1868559766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1071867389}
@@ -2966,7 +2966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 489, y: 379}
+  m_AnchoredPosition: {x: 837, y: 442}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1868559768
