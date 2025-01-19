@@ -3875,8 +3875,8 @@ MonoBehaviour:
   waypointsObject: {fileID: 445880923}
   currentWaypoint: 0
   timer: {fileID: 0}
-  moveSpeed: 1
-  turnSpeed: 3
+  moveSpeed: 0.5
+  turnSpeed: 1
 --- !u!1 &993611427
 GameObject:
   m_ObjectHideFlags: 0

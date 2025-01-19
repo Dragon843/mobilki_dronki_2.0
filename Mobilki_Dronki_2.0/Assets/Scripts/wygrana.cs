@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class wygrana : MonoBehaviour { 
 
+
    public void OnTriggerEnter(Collider other) 
    {
-        if (other.CompareTag("Dron")) {
-            int counterHoop = HoopManager.counter;
-            if(counterHoop >= 6){SceneManager.LoadScene("wygrales");}
+        if (other.CompareTag("Dron"))
+        {
+            SceneManager.LoadScene("wygrales");
         }
+        else if (other.CompareTag("DronBOT")) 
+        {
+            SceneManager.LoadScene("przegrales");
+        }
+
    } 
+
 }
