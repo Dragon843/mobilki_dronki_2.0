@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/wygrales.unity
     guid: e324c4b3741b10a41bb77e4fb8d098c9
+  - enabled: 1
+    path: Assets/Scenes/przegrales.unity
+    guid: 165457dff1160f143873333a0a4e4be2
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: bbe118f4c507419a09761d324e72a9f3, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 74a05b42a1e86fc44ad7ee0681b5469a, type: 2}
