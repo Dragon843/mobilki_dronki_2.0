@@ -6371,7 +6371,7 @@ MonoBehaviour:
   currentWaypoint: 18
   timer: {fileID: 0}
   sliderAngleX: {fileID: 2004065934}
-  sliderThrustFower: {fileID: 1360352250}
+  sliderThrustForce: {fileID: 1360352250}
   playerThrustForce: 40
   playerAngleX: 20
   playerRotateY: 40

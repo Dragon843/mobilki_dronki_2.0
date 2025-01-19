@@ -11,7 +11,7 @@ public class PlayerInput : MonoBehaviour
 
     [Header("UI Elements")]
     public Slider sliderAngleX;
-    public Slider sliderThrustFower;
+    public Slider sliderThrustForce;
 
     [Header("Flight settings")]
     [SerializeField]
@@ -38,7 +38,7 @@ public class PlayerInput : MonoBehaviour
         currentWaypoint = 18;
         playerBody = GetComponent<Rigidbody>();
 
-        sliderThrustFower.onValueChanged.AddListener(OnThrPowSliderChanged);
+        sliderThrustForce.onValueChanged.AddListener(OnThrPowSliderChanged);
         sliderAngleX.onValueChanged.AddListener(OnAngleXSliderChanged);
 
         droneRotation = transform.rotation.eulerAngles;
@@ -114,16 +114,12 @@ public class PlayerInput : MonoBehaviour
     public void OnDownLeftButton()
     {
         droneRotation.y -= playerRotateY * Time.fixedDeltaTime;
-
-        transform.rotation = Quaternion.Euler(droneRotation);
     }
 
     // Funkcja Aktywująca się przy przyciśnięciu prawego przycisku
     public void OnDownRightButton()
     {
         droneRotation.y += playerRotateY * Time.fixedDeltaTime;
-
-        transform.rotation = Quaternion.Euler(droneRotation);
     }
 
     // Funkcja kontrolująca obrót drona
