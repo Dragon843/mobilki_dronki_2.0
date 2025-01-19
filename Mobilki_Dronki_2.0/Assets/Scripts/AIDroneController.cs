@@ -18,7 +18,7 @@ public class AIDroneController : MonoBehaviour
 
         if (waypointsObject == null){ Debug.LogError("Obiekt Waypoints nie jest przypisany!");return;}
 
-        if (timer == null){ timer = FindFirstObjectByType<Timer>();} // Automatycznie znajdź Timer w scenie
+        if (timer == null){ timer = FindObjectOfType<Timer>();} // Automatycznie znajdź Timer w scenie
         currentWaypoint = 0;
     }
     void FixedUpdate(){NavigateToWaypoint();}
