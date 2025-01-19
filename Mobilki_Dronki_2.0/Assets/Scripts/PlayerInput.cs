@@ -15,11 +15,11 @@ public class PlayerInput : MonoBehaviour
 
     [Header("Flight settings")]
     [SerializeField]
-    private float playerThrustForce = 30f; // Siła lotu drona
+    private float playerThrustForce = 40f; // Siła lotu drona
     [SerializeField]
     private float playerAngleX = 20f; // Maksymalne nachylenie w osi X
     [SerializeField]
-    private float playerRotateY = 40f; // Prędkość zmiany obrotu w osi Y
+    private float playerRotateY = 140f; // Prędkość zmiany obrotu w osi Y
 
     /* [SerializeField]
     private float playerAngleZ = 20f; // Maksymalne nachylenie w osi Z */
