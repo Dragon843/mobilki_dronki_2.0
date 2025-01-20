@@ -8,7 +8,9 @@ public class HoopManager : MonoBehaviour
     public static int counter = 0; // Licznik pokonanych obrêczy
 
 
-    private void Start(){ if (hoops.Count == 0){ Debug.LogError("Nie przypisano obrêczy do HoopManager!");}}
+    private void Start(){
+        counter = 0;
+        if (hoops.Count == 0){ Debug.LogError("Nie przypisano obrêczy do HoopManager!");}}
 
     public void HoopPassed(GameObject hoop)
     {
