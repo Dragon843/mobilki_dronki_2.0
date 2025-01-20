@@ -39,11 +39,11 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        currentWaypoint = 18;
-        playerBody = GetComponent<Rigidbody>();
-
         sliderThrustForce.onValueChanged.AddListener(OnThrPowSliderChanged);
         sliderAngleX.onValueChanged.AddListener(OnAngleXSliderChanged);
+
+        currentWaypoint = 18;
+        //playerBody = GetComponent<Rigidbody>();
 
         droneRotation = transform.rotation.eulerAngles;
 

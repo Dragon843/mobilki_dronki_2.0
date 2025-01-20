@@ -2806,12 +2806,13 @@ MonoBehaviour:
   playerBody: {fileID: 98814691}
   waypointsObject: {fileID: 0}
   currentWaypoint: 18
-  timer: {fileID: 0}
   sliderAngleX: {fileID: 2004065934}
-  sliderThrustFower: {fileID: 1360352250}
+  sliderThrustForce: {fileID: 1360352250}
   playerThrustForce: 40
   playerAngleX: 20
   playerRotateY: 40
+  waypoints: {fileID: 0}
+  timer: {fileID: 0}
 --- !u!1 &1626087283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000013520975216, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
