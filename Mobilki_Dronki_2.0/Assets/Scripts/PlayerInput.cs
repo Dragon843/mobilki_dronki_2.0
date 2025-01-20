@@ -45,8 +45,6 @@ public class PlayerInput : MonoBehaviour
         currentWaypoint = 18;
         //playerBody = GetComponent<Rigidbody>();
 
-        droneRotation = transform.rotation.eulerAngles;
-
         /* // Wlaczamy akcelerometr
         Input.gyro.enabled = true;
 
@@ -152,16 +150,12 @@ public class PlayerInput : MonoBehaviour
     public void OnDownLeftButton()
     {
         droneRotation.y -= playerRotateY * Time.deltaTime;
-
-        transform.rotation = Quaternion.Euler(droneRotation);
     }
 
     // Funkcja Aktywująca się przy przyciśnięciu prawego przycisku
     public void OnDownRightButton()
     {
         droneRotation.y += playerRotateY * Time.deltaTime;
-
-        transform.rotation = Quaternion.Euler(droneRotation);
     }
 
     // Funkcja kontrolująca obrót drona
